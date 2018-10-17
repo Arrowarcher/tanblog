@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +48,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'blog',
 ]
 
 ROOT_URLCONF = 'tanblog.urls'
@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'tanblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tanblog',
+        'USER': 'root',
+        'PASSWORD': 'jxkj',
+        'HOST': '127.0.0.1',
+        'PORT': 3306,
     }
 }
 
