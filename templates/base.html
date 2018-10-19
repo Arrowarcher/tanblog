@@ -92,13 +92,27 @@
                 <div class="widget widget-archives">
                     <h3 class="widget-title">归档</h3>
                     {% archives as date_list %}
+                    {#new method：regroup：https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#regroup#}
+                    {% regroup date_list by year as year_post_group %}
                     <ul>
-                        {% for date in date_list %}
-                            <li>
-                                <a href="#">{{ date.year }} 年 {{ date.month }} 月</a>
+                        {% for year in year_post_group %}
+                            <li>{{ year.grouper }} 年
+                                {% regroup year.list by month as month_post_group %}
+                                <ul>
+                                    {% for month in month_post_group %}
+                                        <li>
+                                            <a href="{% url 'blog:archives' year.grouper month.grouper %}">{{ month.grouper }}
+                                                月（{{ month.list | length }}）</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             </li>
+                            {#                        {% for date in date_list %}#}
+                            {#                            <li>#}
+                            {#                                <a href="{% url 'blog:archives' date.year date.month %}">{{ date.year }} 年 {{ date.month }} 月</a>#}
+                            {#                            </li>#}
                         {% empty %}
-                            暂无归档！
+                            暂无归档
                         {% endfor %}
                     </ul>
                 </div>
@@ -109,10 +123,10 @@
                     <ul>
                         {% for category in category_list %}
                             <li>
-                                <a href="#">{{ category.name }} <span class="post-count">(13)</span></a>
+                                <a href="{% url 'blog:category' category.pk %}">{{ category.name }} <span class="post-count">({{ category.post_set.count }})</span></a>
                             </li>
                         {% empty %}
-                            暂无分类！
+                            暂无分类
                         {% endfor %}
                     </ul>
                 </div>
