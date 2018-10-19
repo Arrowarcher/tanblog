@@ -1,5 +1,7 @@
 import markdown
 from django.shortcuts import render, get_object_or_404
+
+from comments.forms import CommentForm
 from .models import Post, Category
 # Create your views here.
 from django.http import HttpResponse
@@ -19,7 +21,13 @@ def detail(request, pk):
     # extra 本身包含很多拓展
     # codehilite 是语法高亮拓展
     # toc 则允许我们自动生成目录
-    return render(request, 'blog/detail.html', context={'post': post})
+    form = CommentForm()
+    comment_list = post.comment_set.all()
+    context = {'post': post,
+               'form': form,
+               'comment_list': comment_list
+               }
+    return render(request, 'blog/detail.html', context=context)
 
 def archives(request, year, month):
     post_list = Post.objects.filter(created_time__year=year,
