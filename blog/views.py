@@ -20,3 +20,9 @@ def detail(request, pk):
     # codehilite 是语法高亮拓展
     # toc 则允许我们自动生成目录
     return render(request, 'blog/detail.html', context={'post': post})
+
+def archives(request, year, month):
+    post_list = Post.objects.filter(created_time__year=year,
+                                    created_time__month=month
+                                    ).order_by('-created_time')
+    return render(request, 'blog/index.html', context={'post_list': post_list})
