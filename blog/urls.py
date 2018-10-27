@@ -11,4 +11,5 @@ urlpatterns = [
     re_path(r'^archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.ArchivesView.as_view(), name='archives'),
     # path('archives/<int:year>/<int:month>/', views.archives, name='archives'),
     path('category/<int:pk>/', views.CategoryView.as_view(), name='category'),
+    path('tag/<int:pk>/', views.TagView.as_view(), name='tag'),
 ]

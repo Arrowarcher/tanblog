@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from comments.forms import CommentForm
-from .models import Post, Category
+from .models import Post, Category, Tag
 # Create your views here.
 from django.http import HttpResponse
 
@@ -124,3 +124,8 @@ class CategoryView(IndexView):
     def get_queryset(self):     #默认获取指定模型的全部列表数据,需复写
         cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
         return super(CategoryView, self).get_queryset().filter(category=cate)
+
+class TagView(IndexView):
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super(TagView, self).get_queryset().filter(tags=tag)
