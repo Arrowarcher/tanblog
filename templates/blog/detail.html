@@ -76,22 +76,7 @@
 {% block toc %}
     <div class="widget widget-content">
         <h3 class="widget-title">文章目录</h3>
-        <ul>
-            <li>
-                <a href="#">教程特点</a>
-            </li>
-            <li>
-                <a href="#">谁适合这个教程</a>
-            </li>
-            <li>
-                <a href="#">在线预览</a>
-            </li>
-            <li>
-                <a href="#">资源列表</a>
-            </li>
-            <li>
-                <a href="#">获取帮助</a>
-            </li>
-        </ul>
+        {{ post.toc|safe }}
+{#    post.toc 实际是一段 HTML 代码，我们知道 Django 会对模板中的 HTML 代码进行转义，所以要使用 safe 标签防止 Django 对其转义。#}
     </div>
 {% endblock toc %}
