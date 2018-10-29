@@ -1,6 +1,9 @@
 import markdown
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
+from django.utils.text import slugify
 from django.views.generic import ListView, DetailView
+from markdown.extensions.toc import TocExtension
 
 from comments.forms import CommentForm
 from .models import Post, Category, Tag
@@ -98,7 +101,9 @@ class PostDetailView(DetailView):
             extensions=[
                 'markdown.extensions.extra',
                 'markdown.extensions.codehilite',
-                'markdown.extensions.toc',
+                # 'markdown.extensions.toc',
+                TocExtension(slugify=slugify),  # Markdown 内置的处理方法不能处理中文标题，
+                                                # 所以我们使用了 django.utils.text 中的 slugify 方法
             ])
         post.body = md.convert(post.body)  #一旦调用该方法后，实例 md 就会多出一个 toc 属性
         post.toc = md.toc
@@ -137,3 +142,16 @@ class TagView(IndexView):
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tag)
+
+def search(request):
+    q = request.GET.get('q')
+    error_msg = ''
+
+    if not q:
+        error_msg = '请输入关键字'
+        return render(request, 'blog/index.html', {'erroe_msg': error_msg})
+
+    post_list = Post.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
+    # Q 对象用于包装查询表达式，其作用是为了提供复杂的查询逻辑
+    return render(request, 'blog/index.html', {'error_msg': error_msg,
+                                               'post_list': post_list})
