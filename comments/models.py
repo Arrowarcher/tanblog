@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from django.utils.six import python_2_unicode_compatible
+# from django.utils.six import python_2_unicode_compatible
 
 # @python_2_unicode_compatible 装饰器用于兼容 Python2
 class Comment(models.Model):

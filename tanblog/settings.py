@@ -25,7 +25,7 @@ SECRET_KEY = '7cmpoq)%mj#k)8c$0-=w@_m*4a(*^hd#7e8gsoro2=t0ue*!_l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '10.8.0.76']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost ']
 
 
 # Application definition
@@ -37,19 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'haystack',                         # haystack全文检索的框架
+    # 'haystack',                         # haystack全文检索的框架
     'blog',
     'comments',
 ]
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'blog.whoosh_cn_backend.WhooshEngine',            # 指定搜索引擎
-        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),             # 索引文件存放位置
-    },
-}
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'      # 作用是每当有文章更新时就更新索引。
+# HAYSTACK_CONNECTIONS = {
+#     'default': {
+#         'ENGINE': 'blog.whoosh_cn_backend.WhooshEngine',            # 指定搜索引擎
+#         'PATH': os.path.join(BASE_DIR, 'whoosh_index'),             # 索引文件存放位置
+#     },
+# }
+# HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+# HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'      # 作用是每当有文章更新时就更新索引。
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,13 +90,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tanblog',
-        'USER': 'root',
-        'PASSWORD': 'jxkj123',
+        'USER': 'devops',
+        'PASSWORD': 'Devops@20200409',
         'HOST': '127.0.0.1',
-        'PORT': 3306,
+        'PORT': 1331,
     }
 }
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
