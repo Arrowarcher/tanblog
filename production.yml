@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  static:
+
+services:
+  tanblog:
+    build:
+      context: .
+      dockerfile: compose/production/django/Dockerfile
+    image: tanblog
+    container_name: tanblog
+    working_dir: /app
+    volumes:
+      - static:/app/static
+    env_file:
+      - .envs/.production
+    ports:
+      - "8080:8080"
+    command: /start.sh
+
+  nginx:
+    build:
+      context: .
+      dockerfile: compose/production/nginx/Dockerfile
+    image: tanblog_nginx
+    container_name: tanblog_nginx
+    volumes:
+      - static:/apps/tanblog/static
+    ports:
+      - "80:80"
+      - "443:443"
