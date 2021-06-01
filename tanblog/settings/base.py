@@ -90,9 +90,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tanblog',
-        'USER': 'devops',
-        'PASSWORD': 'Devops@20200409',
-        'HOST': '127.0.0.1',
+        'USER': 'arrow',
+        'PASSWORD': 'arrow',
+        'HOST': '10.4.14.51',
         'PORT': 1331,
     }
 }
