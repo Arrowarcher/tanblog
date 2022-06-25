@@ -1,6 +1,8 @@
 这个项目是一个前后端不分离的blog项目
+
 blog样式见：https://www.zmrenwu.com/
 此blog代码也是学习上面教程写出来的。
+
 我把它用来制作docker镜像学习使用，需要的自取，或非docker使用
 
 # 使用docker部署项目
