@@ -3,6 +3,8 @@
 blog样式见：https://www.zmrenwu.com/
 此blog代码也是学习上面教程写出来的。
 
+<img src="blog.png" alt="drawing" width="50%"/>
+
 我把它用来制作docker镜像学习使用，需要的自取，或非docker使用
 
 # 使用docker部署项目
